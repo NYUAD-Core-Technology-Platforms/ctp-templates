@@ -1,0 +1,6 @@
+# pnpm workspace declaration.
+# Only npm-based templates (Node packages) need to be listed here; templates
+# that aren't JavaScript projects — latex, powerpoint, word — don't go through
+# pnpm and don't need a package.json.
+packages:
+  - "slidev"
