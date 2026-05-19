@@ -1,100 +1,167 @@
 # ctp-templates
 
-Templates and shared design assets for **Core Technology Platforms (CTP) at NYU Abu Dhabi**. One folder per output format — Slidev decks, LaTeX reports, PowerPoint decks, Word memos. The brand identity (NYU violet, Source Serif 4 + Inter, hairline-driven layout) is canonical here and re-applied by every template.
+This repository holds **all templates** used by Core Technology Platforms at NYU Abu Dhabi to produce deliverables — Slidev presentations, LaTeX reports, PowerPoint decks, Word memos, and any future format CTP staff scaffold more than once. It's also the source-of-truth for the CTP visual identity: every template here draws its colors, fonts, logos, and design rules from the single source in `shared/brand/`.
 
-## Layout
+Other CTP repos (like [`ctp-upscaling-workshop-series`](https://github.com/NYUAD-Core-Technology-Platforms/ctp-upscaling-workshop-series)) consume templates from this repo. **One brand, one source, propagated everywhere.**
+
+---
+
+## Table of contents
+
+- [What's in this repo](#whats-in-this-repo) — folder tour
+- [Which template do I want](#which-template-do-i-want) — quick decision guide
+- [Brand assets — the single source](#brand-assets--the-single-source) — `shared/brand/`
+- [Set up locally](#set-up-locally) — first-time clone and install
+- [How consumer repos use these templates](#how-consumer-repos-use-these-templates) — sibling-checkout pattern
+- [Adding a new template format](#adding-a-new-template-format)
+- [More docs](#more-docs)
+
+---
+
+## What's in this repo
 
 ```
 .
-├── slidev/                 # Slidev presentation theme (slidev-theme-ctp). Active.
-├── latex/                  # LaTeX class + reports, posters, theses. Placeholder.
+├── slidev/                 # Slidev presentation theme. Active.
+├── latex/                  # LaTeX class + reports/posters/theses. Placeholder.
 ├── powerpoint/             # .pptx slide-master templates. Placeholder.
-├── word/                   # .docx letter / memo / report templates. Placeholder.
+├── word/                   # .docx letter/memo/report templates. Placeholder.
 ├── shared/
-│   └── brand/              # canonical NYUAD lockup + design-system reference
-│       ├── nyuad-logo.png
-│       ├── colors_and_type.css        # tokens (every template mirrors these)
-│       ├── DESIGN_SYSTEM.md           # palette, type, voice, do/avoid
-│       └── README.md
-├── AGENTS.md               # guidance for agents working in this repo
-├── CONTRIBUTING.md
-├── package.json            # workspace root (for Node-based templates only)
+│   └── brand/              # Canonical NYUAD brand source (logo, colors, type, design system).
+├── AGENTS.md               # Guidance for AI agents working in this repo.
+├── CONTRIBUTING.md         # Editorial and code conventions.
+├── package.json            # pnpm workspace root (Node-based templates only).
 ├── pnpm-workspace.yaml
+└── README.md               # this file
+```
+
+Each top-level folder is **one template format**:
+
+- `slidev/` is a Node package (the `slidev-theme-ctp` npm theme). It has a `package.json` and is registered as a pnpm workspace.
+- `latex/`, `powerpoint/`, `word/` are not Node packages. They're plain folders containing format-specific files (`.cls` and `.tex` for LaTeX, `.pptx` for PowerPoint, `.docx` for Word).
+
+The structure is **flat by format**, not Node-centric. Adding a new format means creating a new top-level folder — that's it.
+
+---
+
+## Which template do I want
+
+| If you're making a... | Open this folder | Status |
+|----------------------|------------------|--------|
+| **Slidev presentation** (workshop deck, seminar slides, anything HTML-based) | [`slidev/`](slidev/) | **Working.** Read `slidev/README.md` for the full walkthrough. |
+| **LaTeX report / poster / thesis** | [`latex/`](latex/) | Placeholder. README documents the planned structure. |
+| **PowerPoint deck** (when Slidev isn't an option) | [`powerpoint/`](powerpoint/) | Placeholder. |
+| **Word letter / memo / SOP** | [`word/`](word/) | Placeholder. |
+
+Currently the only template you can actually use is **Slidev**. The placeholder folders contain a README each, documenting what *will* go there when someone builds out that format.
+
+---
+
+## Brand assets — the single source
+
+`shared/brand/` is the canonical home for the CTP visual identity. Every template here reads from it:
+
+```
+shared/brand/
+├── nyuad-logo.png              # official NYUAD lockup, used everywhere
+├── colors_and_type.css         # canonical color + type tokens (the slidev theme mirrors these 1:1)
+├── DESIGN_SYSTEM.md            # full design-system reference: palette, type, voice, do/avoid list
 └── README.md
 ```
 
-The structure is **flat by format**, not Node-centric. Each top-level folder is its own template — internally it can be a Node package (slidev), a LaTeX project (latex), a .pptx file (powerpoint), or whatever the format demands. The `pnpm-workspace.yaml` only lists folders that are npm packages.
+**The rule for templates:** never duplicate brand values. If you need NYU violet in a LaTeX color macro, mirror it from `colors_and_type.css`. If you need the logo in a PowerPoint slide master, point at `nyuad-logo.png`. One source change should propagate to every template.
 
-## Templates
+If you've never read `DESIGN_SYSTEM.md`, do that before authoring any new template — it captures the voice, the do/avoid list, and the "what not to do" lessons (no emoji, no colored left-border accents, squared corners, gold reserved for editorial highlights, etc.).
 
-| Template | Folder | Status | What it produces |
-|----------|--------|--------|------------------|
-| Slidev theme | `slidev/` | v0.1 — usable | Slidev decks (`slides.md` → HTML / PDF) |
-| LaTeX | `latex/` | placeholder | Reports, posters, theses |
-| PowerPoint | `powerpoint/` | placeholder | `.pptx` decks |
-| Word | `word/` | placeholder | `.docx` letters, memos, reports |
+---
 
-The Slidev theme is the only working template right now. The others have READMEs that document what should go in them when they're built out.
+## Set up locally
 
-## Brand: one canonical source
+You need:
 
-`shared/brand/` is the source-of-truth for the CTP visual identity. Every template draws from it:
+- **Node.js 18 or newer** (for the Slidev theme).
+- **pnpm 9 or newer** — `npm install -g pnpm` if you don't have it.
+- **git**.
 
-- `nyuad-logo.png` — official NYUAD lockup.
-- `colors_and_type.css` — canonical CSS tokens for color and type. Even non-CSS templates mirror these values (LaTeX color macros, PowerPoint theme colors, Word style definitions) so a single edit here can be propagated everywhere.
-- `DESIGN_SYSTEM.md` — full design-system reference: palette, type pairings, voice, do/avoid list.
-- `README.md` — usage notes.
-
-When the brand shifts, update `shared/brand/` first, then each template that mirrors those values.
-
-## Working on the Slidev theme
+Once those are installed:
 
 ```bash
+git clone https://github.com/NYUAD-Core-Technology-Platforms/ctp-templates.git
+cd ctp-templates
 pnpm install
-pnpm dev:slidev          # opens slidev/example.md at http://localhost:3030
 ```
 
-`slidev/example.md` documents every layout and component the theme exposes.
+`pnpm install` installs dependencies for any Node-based template (currently just `slidev/`).
 
-## How consumer repos use templates
+To preview the Slidev theme — that is, see a demo deck rendered with every layout and component visible side by side:
 
-### Slidev (today)
-
-Downstream repos (e.g. [ctp-upscaling-workshop-series](https://github.com/NYUAD-Core-Technology-Platforms/ctp-upscaling-workshop-series)) check `ctp-templates` out as a sibling and `link:` to the slidev folder:
-
-```
-<parent>/
-├── ctp-templates/                      # this repo
-└── ctp-upscaling-workshop-series/      # consumer
-    └── workshops/01-slidev/package.json
-        depends on "slidev-theme-ctp": "link:../../../ctp-templates/slidev"
+```bash
+pnpm dev:slidev
 ```
 
-The `link:` protocol creates a symlink — theme edits hot-reload across both repos.
+Opens `slidev/example.md` at `http://localhost:3030`.
 
-### Other formats (when they land)
+---
 
-- **LaTeX:** consumers add this repo as a git submodule, or use `latexmk` with `-I` pointing at `ctp-templates/latex/shared/`. Once stable, package as a CTAN-style class. Document the chosen approach in `latex/README.md`.
-- **PowerPoint / Word:** users download the `.pptx` / `.docx` from this repo (or a release page) and open via "New from Template". No package management — distribute via a shared drive or GitHub release if version control matters.
+## How consumer repos use these templates
 
-### When the slidev theme stabilizes
+### The current pattern: sibling checkout
 
-Publish it to GitHub Packages (private npm registry for the NYUAD org) so consumers stop needing a sibling checkout:
+Today, downstream repos clone `ctp-templates` as a **neighbor folder** on disk:
+
+```
+<some-parent-folder>/
+├── ctp-templates/                      <-- this repo
+└── ctp-upscaling-workshop-series/      <-- a consumer that uses the Slidev theme
+```
+
+The consumer's `package.json` then declares a relative-path dependency:
+
+```json
+"slidev-theme-ctp": "link:../../../ctp-templates/slidev"
+```
+
+`link:` is a pnpm protocol that creates a symlink rather than copying files. The consequence: edits to `ctp-templates/slidev/` are immediately visible to any running consumer dev server — no rebuild, no reinstall.
+
+The consumer's docs ([ctp-upscaling-workshop-series/README.md](https://github.com/NYUAD-Core-Technology-Platforms/ctp-upscaling-workshop-series)) explain the exact folder layout it expects. The Slidev theme's [own README](slidev/README.md#use-the-theme-for-a-standalone-presentation) has a full six-step walkthrough for creating a one-off presentation from scratch.
+
+### The future: publish to a registry
+
+When the Slidev theme stabilizes and a second team starts using it, the right move is publishing it to GitHub Packages (the npm registry built into GitHub for NYUAD's organization). Consumers then pin a specific version:
 
 ```json
 "slidev-theme-ctp": "^0.1.0"
 ```
 
-## Adding a new template
+The sibling-checkout requirement goes away. We don't need this yet because the theme is still evolving and there's only one consumer.
 
-1. Decide if it's Node-based (npm package) or not.
-2. Create a top-level folder named for the format (`<format>/`, kebab-case).
-3. If it's Node-based: add a `package.json`, add the folder to `pnpm-workspace.yaml`.
-4. Source brand from `shared/brand/` — never duplicate the values.
-5. Write a `<format>/README.md` describing the template, how to build/use it, and any format-specific conventions.
-6. Add a row to the **Templates** table above and document anything notable in `AGENTS.md`.
+---
 
-See `CONTRIBUTING.md` for editorial conventions and `AGENTS.md` for rules baked into the design language.
+## Adding a new template format
+
+Step-by-step for adding (e.g.) a poster template, an Affinity Publisher template, or a new format we haven't thought of:
+
+1. **Pick a folder name** — kebab-case, names the format: `poster`, `affinity`, etc.
+2. **Create the folder** at the repo root.
+3. **If it's a Node package** (rare for non-Slidev): add a `package.json`, add the folder name to `pnpm-workspace.yaml`. For most non-Node formats, skip this.
+4. **Source brand assets from `shared/brand/`** — don't duplicate. Reference colors from `colors_and_type.css`, embed the logo from `nyuad-logo.png`.
+5. **Write a `<format>/README.md`** describing what the template is, how to build/use it, and any format-specific conventions.
+6. **Add a row to the "Which template do I want" table** above so the new template is discoverable.
+7. **Update `AGENTS.md`** if the new format has rules that future contributors (or agents) need to know.
+
+The existing placeholder READMEs (`latex/README.md`, `powerpoint/README.md`, `word/README.md`) show the level of detail expected.
+
+---
+
+## More docs
+
+- [`slidev/README.md`](slidev/README.md) — Slidev theme: full reference, layouts, components, two walkthroughs (new workshop and standalone presentation).
+- [`shared/brand/README.md`](shared/brand/README.md) — brand assets in detail.
+- [`shared/brand/DESIGN_SYSTEM.md`](shared/brand/DESIGN_SYSTEM.md) — palette, type rules, voice, do/avoid list.
+- [`CONTRIBUTING.md`](CONTRIBUTING.md) — editorial and code conventions when modifying templates.
+- [`AGENTS.md`](AGENTS.md) — guidance for AI agents working in this repo (design rules, gotchas, file conventions).
+
+---
 
 ## License
 

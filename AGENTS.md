@@ -79,6 +79,7 @@ pnpm dev:slidev       # opens slidev/example.md at http://localhost:3030
 - **`<<< @/path` snippet imports** work cleanly for code files (`.ts`, `.js`, `.vue`, `.yml`) but tangle the MDC/Shiki pipeline for `.md` files — the imported `---` and `::slot::` markers leak into the host slide. Inline markdown examples as literal code blocks (` ```md ... ``` `) instead.
 - **Dark backgrounds need locally re-bound color tokens**, not per-element `color` overrides. The `.slidev-layout` rule sets `color: var(--fg1)` for all children, so individual elements stay near-black on a violet background unless you redefine `--fg1` locally on the layout container. See `slidev/layouts/section.vue`.
 - **Vue scoped CSS doesn't reach slot content** (slot content belongs to the parent's scope). Use `:deep(selector)` from the layout's scoped CSS to style markdown-generated descendants.
+- **Don't import runtime helpers from `@slidev/types` in the theme** (e.g. `defineAppSetup` in `setup/main.ts`). `@slidev/types` is a devDependency of this theme; consumers building decks won't have it installed transitively, and rollup will fail with "Failed to resolve import @slidev/types". Write plain functions with explicit parameter types instead. The setup helper is essentially an identity function — its only value is type inference inside this file.
 
 ### File layout
 
