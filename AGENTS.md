@@ -64,6 +64,15 @@ The Slidev theme is consumed by sibling repos via `link:`. Today the only consum
 - Update the top-level `README.md` table.
 - Update this file if the new template has format-specific rules agents need to know.
 
+**Cross-repo coordination — consumer agents:**
+
+When the user is working in a consumer repo (currently only [`ctp-upscaling-workshop-series`](https://github.com/NYUAD-Core-Technology-Platforms/ctp-upscaling-workshop-series)), that repo has its own `AGENTS.md` files:
+
+- [`ctp-upscaling-workshop-series/AGENTS.md`](https://github.com/NYUAD-Core-Technology-Platforms/ctp-upscaling-workshop-series/blob/main/AGENTS.md) — consumer-side rules: the sibling-checkout assumption, build gotchas (`--base ./`, blank `dist/index.html`), npm vs pnpm incompatibility, Windows symlink permissions.
+- [`ctp-upscaling-workshop-series/workshops/AGENTS.md`](https://github.com/NYUAD-Core-Technology-Platforms/ctp-upscaling-workshop-series/blob/main/workshops/AGENTS.md) — slide-authoring conventions: frontmatter, snippets, speaker notes, the `<<<` import gotcha for `.md` files, the dark-background-contrast rule.
+
+If you're making a theme change here that affects consumer behavior, also read those files so you understand what the consumer expects. Add a note to them too if you introduce a new consumer-visible convention.
+
 ## Working on the Slidev theme
 
 ```bash

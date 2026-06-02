@@ -161,6 +161,10 @@ The existing placeholder READMEs (`latex/README.md`, `powerpoint/README.md`, `wo
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — editorial and code conventions when modifying templates.
 - [`AGENTS.md`](AGENTS.md) — guidance for AI agents working in this repo (design rules, gotchas, file conventions).
 
+### For AI agents working in the consumer repo
+
+The Slidev theme here is consumed by [`ctp-upscaling-workshop-series`](https://github.com/NYUAD-Core-Technology-Platforms/ctp-upscaling-workshop-series). If you're an agent operating across both, the workshop-series repo has its own AGENTS.md files at the root and at `workshops/` — consult them for consumer-side rules (build gotchas, sibling-checkout assumption, slide-authoring conventions). Cross-references are in [this repo's `AGENTS.md`](AGENTS.md).
+
 ---
 
 ## License
