@@ -24,6 +24,12 @@
 
 <style scoped>
 .ctp-two-cols {
+  /* Same pattern as .ctp-default — claim full slide height so the grid can
+     expand and the footer pins to the bottom. */
+  height: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+
   display: flex;
   flex-direction: column;
   background: var(--bg1);
@@ -40,7 +46,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--s-7);
-  flex: 1;
+  flex: 1 1 0;
   min-height: 0;
 }
 
