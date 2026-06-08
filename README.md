@@ -118,7 +118,7 @@ Today, downstream repos clone `ctp-templates` as a **neighbor folder** on disk:
 The consumer's `package.json` then declares a relative-path dependency:
 
 ```json
-"slidev-theme-ctp": "link:../../../ctp-templates/slidev"
+"slidev-theme-ctp": "file:../../../ctp-templates/slidev"
 ```
 
 `link:` is a pnpm protocol that creates a symlink rather than copying files. The consequence: edits to `ctp-templates/slidev/` are immediately visible to any running consumer dev server — no rebuild, no reinstall.

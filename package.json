@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "description": "Templates and shared design assets for Core Technology Platforms at NYU Abu Dhabi. Source-of-truth for the CTP visual identity and the reusable scaffolding used across CTP deliverables (presentations, documents, reports).",
   "scripts": {
+    "new-deck": "node scripts/new-deck.mjs",
     "dev:slidev": "pnpm --filter slidev-theme-ctp dev",
     "build:slidev": "pnpm --filter slidev-theme-ctp build"
   },

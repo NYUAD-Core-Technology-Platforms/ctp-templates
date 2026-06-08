@@ -91,6 +91,13 @@
   padding: 0.1em 0.35em;
   border-radius: var(--r-1);
   border: 1px solid var(--hairline);
+
+  /* Disable JetBrains Mono's programming ligatures inside code. They turn
+     "<--", "-->", "--" into arrow / em-dash glyphs, which is wrong when the
+     code is teaching literal syntax (HTML comments, shell flags, etc.).
+     Leave ligatures on for prose font (Inter) — they're fine there. */
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0, "dlig" 0;
 }
 
 /* Code blocks — squared, hairline border, no shadow. */
@@ -99,7 +106,21 @@
   border: 1px solid var(--hairline);
   box-shadow: var(--sh-0);
 }
+.slidev-layout pre,
+.slidev-layout pre code {
+  /* Same ligature kill-switch on multi-line code blocks; rules on `code`
+     above don't reach `pre > span.line > span` etc. that Shiki produces. */
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0, "dlig" 0;
+}
 .slidev-layout pre code { border: 0; background: transparent; padding: 0; }
+.slidev-layout pre *,
+.slidev-layout code * {
+  /* Belt and suspenders: Shiki wraps each token in a <span>, which can have
+     its own font settings. Inherit the no-ligature rule explicitly. */
+  font-variant-ligatures: inherit;
+  font-feature-settings: inherit;
+}
 
 /* Block quotes — hairline left rule (the one place a left rule is permissible:
    it carries quotation semantics, not decorative accent). */

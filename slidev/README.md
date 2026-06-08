@@ -72,181 +72,115 @@ The full walkthrough with explanations of every step lives in [`ctp-upscaling-wo
 
 ## Use the theme for a standalone presentation
 
-If you want a one-off deck **outside** the workshop series — a seminar talk, a poster pitch, a meeting deck — follow these six steps. Assume you have nothing yet.
+For a one-off deck **outside** the workshop series — a seminar talk, a meeting deck, a poster pitch — one command scaffolds everything.
 
-### Step 0 — Plan your folder layout
+### Prerequisite — `ctp-templates` cloned once
 
-You'll put your new presentation **next to** the `ctp-templates` folder, so they share a parent. I'll use `C:\Users\hz3752` as an example; you can pick any folder on your machine.
-
-The end state looks like this:
-
-```
-C:\Users\hz3752\
-├── ctp-templates\                     <-- this repo (already on your machine)
-└── my-new-talk\                       <-- we're going to create this
-```
-
-The reason they have to share a parent: your new deck's `package.json` will point at the theme using a relative path like `..\ctp-templates\slidev`. If the two folders aren't neighbors, that path doesn't resolve.
-
-### Step 1 — Confirm `ctp-templates` is on your machine
-
-Open a terminal (PowerShell on Windows, Terminal on macOS / Linux). Navigate to the folder you chose:
+Have this repo (`ctp-templates`) checked out somewhere on your machine. The new deck folder will be created **next to** it, so they share a parent. If you don't have it yet:
 
 ```bash
-cd C:\Users\hz3752
-```
-
-> `cd` ("change directory") moves your terminal's current location into that folder. From here on, any command you run is executed relative to this folder. On macOS / Linux use forward slashes: `cd /Users/hadi`.
-
-```bash
-ls
-```
-
-> Lists the files and folders in the current location. PowerShell, Bash, and Zsh all accept `ls`. If you see `ctp-templates` in the output, skip to Step 2. If not, do the next three commands.
-
-```bash
+cd <wherever-you-keep-code>      # e.g. C:\Projects or ~/projects
 git clone https://github.com/NYUAD-Core-Technology-Platforms/ctp-templates.git
-```
-
-> Downloads the `ctp-templates` repository from GitHub into a folder named `ctp-templates/` right here. After this finishes, `ls` should show it.
-
-```bash
 cd ctp-templates
 pnpm install
-cd ..
 ```
 
-> Move into the new folder, install its dependencies (pnpm reads `package.json` and downloads everything listed there), then go back up to the parent.
+You only do this once per machine.
 
-You only do this once per machine, not per presentation.
+### One command to scaffold a new deck
 
-### Step 2 — Create a starter Slidev project
-
-Still in the same parent folder (`C:\Users\hz3752` in our example):
+From inside `ctp-templates`:
 
 ```bash
-npm create slidev@latest
+pnpm new-deck my-talk
 ```
 
-> Slidev ships an official scaffolding command. `npm create slidev@latest` downloads it and runs it interactively. The `@latest` part means "use the most recent version of the scaffolder". It creates a new folder with a working starter deck — `slides.md`, `package.json`, `components/`, etc.
+> Replace `my-talk` with whatever you want to call your deck — kebab-case (lowercase letters, digits, hyphens). The script creates a sibling folder `../my-talk/` with everything wired up. It aborts if the folder already exists.
 
-The command asks you a few questions. Answer like this:
+The script generates:
 
-- **"Project name?"** — type `my-new-talk` (or whatever you want to call the project; this will be the folder name).
-- **"Install and start it now?"** — type `n` (we have to wire in the CTP theme first; if you accept here, you'll install the default theme and have to undo it).
-- **Anything else** — press Enter to accept the default.
+```
+<parent>/
+├── ctp-templates/                  (this repo)
+└── my-talk/                        (new — created by the script)
+    ├── slides.md                   (minimal cover + section + content + end)
+    ├── package.json                (Slidev pinned to ^0.49.0; theme via link:)
+    ├── README.md                   (deck-specific run instructions)
+    ├── .gitignore
+    └── public/
+        ├── brand/nyuad-logo.png    (copied from ctp-templates/shared/brand/)
+        └── img/                    (your deck-specific images go here)
+```
 
-When the command finishes, you'll have a new folder `my-new-talk\` with starter Slidev files inside.
-
-### Step 3 — Switch the deck to the CTP theme
-
-Navigate into the new project and open it in your editor:
+It prints the next three commands at the end. Run them:
 
 ```bash
-cd my-new-talk
-```
-
-> Moves into the freshly-created project folder.
-
-```bash
-code .
-```
-
-> Opens VS Code in the current folder (the `.` is shorthand for "this folder"). If you use a different editor, open the `my-new-talk` folder however you usually would.
-
-**Edit `package.json`.** Find the `dependencies` block — it has a line that looks like one of:
-
-```json
-"@slidev/theme-default": "*"
-```
-or
-```json
-"@slidev/theme-seriph": "*"
-```
-
-Delete that line and replace it with this one:
-
-```json
-"slidev-theme-ctp": "link:..\\..\\ctp-templates\\slidev"
-```
-
-> **Windows quirk:** in JSON strings on Windows, backslashes between folders need to be doubled (`\\`). On macOS / Linux use forward slashes: `"link:../../ctp-templates/slidev"`.
-
-Save the file.
-
-**Edit `slides.md`.** The top of the file has a block of settings between two `---` lines (this is called "frontmatter"). Find the line that reads:
-
-```yaml
-theme: seriph
-```
-
-(or `theme: default`, depending on what the scaffolder picked.) Change it to:
-
-```yaml
-theme: ctp
-```
-
-Save the file.
-
-### Step 4 — Copy the NYUAD logo into the project
-
-Back in your terminal, still inside `my-new-talk`:
-
-```bash
-mkdir public\brand
-```
-
-> Creates a new folder `public/brand/` inside the current location. Slidev treats the `public/` folder as static content that's served as-is at the web root (so `public/brand/foo.png` becomes available at the URL `/brand/foo.png`). PowerShell uses backslashes; macOS / Linux use `mkdir -p public/brand` with forward slashes (the `-p` flag tells `mkdir` to also create any missing parent folders).
-
-```bash
-copy ..\ctp-templates\shared\brand\nyuad-logo.png public\brand\
-```
-
-> Copies the NYUAD logo from the sibling `ctp-templates` repo into your new project's `public/brand/` folder. macOS / Linux: `cp ../ctp-templates/shared/brand/nyuad-logo.png public/brand/`.
-
-This is what makes the `<CtpLogo />` component find its image. Slidev serves anything inside `public/` at the URL root, so `public/brand/nyuad-logo.png` becomes `/brand/nyuad-logo.png` in the running deck — which is exactly where `CtpLogo` looks for it.
-
-### Step 5 — Install dependencies and run the dev server
-
-```bash
+cd ../my-talk
 npm install
+npx slidev
 ```
 
-> Reads `package.json`, follows the `link:` pointer back to `..\..\ctp-templates\slidev`, and creates a symlink in `node_modules/` so the theme is available to the deck. Also downloads Slidev itself and every other dependency listed. First run takes ~1 minute; subsequent runs are seconds.
+> `npm install` reads `package.json`, follows the `link:` pointer back to `../ctp-templates/slidev`, and creates a symlink so the theme is available to the deck. First run takes ~1 minute. `npx slidev` starts the dev server and opens `http://localhost:3030/` in your browser. Edits to `slides.md` hot-reload.
 
-```bash
-npm run dev
-```
+### What gets generated in `slides.md`
 
-> Runs the script named `dev` in `package.json`. The scaffolder set that script to `slidev --open`, which starts a local web server and opens your browser to it. The server stays running until you press `Ctrl-C`. While it's running, every edit to `slides.md` or anything in `components/` triggers a hot-reload in the browser. It prints:
-
-```
-  Slidev v0.49.x
-
-  ➜  Local:   http://localhost:3030/
-```
-
-Open that URL in your browser. You should see the starter slides rendered with the CTP look — violet, serif title, hairline footer.
-
-### Step 6 — Start writing
-
-`slides.md` is your deck. Edit it, save, and the browser auto-reloads. Add `title`, `author`, and `info` to the frontmatter at the top of the file:
+A minimal starter that exercises the main theme layouts — cover, section divider, default content slide, end. Replace it with your content:
 
 ```yaml
 ---
 theme: ctp
-title: My Talk Title
+title: My Talk
 author: Your Name
 info: |
-  One-paragraph description of the talk.
-  Appears in the presenter view and PDF exports.
+  One-paragraph description.
 highlighter: shiki
 mdc: true
 layout: cover
 ---
+
+# My Talk
+
+::eyebrow::
+<span class="ctp-tag ctp-tag--accent">CTP · NYUAD</span>
+
+::meta::
+Core Technology Platforms · NYU Abu Dhabi
+2026-06-08
 ```
 
-For what layouts and components you can use, see the [What's in this theme](#whats-in-this-theme) section below. For a worked example, look at `ctp-upscaling-workshop-series/workshops/01-slidev/slides.md` — a complete deck using all the theme's features.
+For the full set of layouts, components, and CSS variables you can override, see [What's in this theme](#whats-in-this-theme) below. For a worked example, look at `ctp-upscaling-workshop-series/workshops/01-slidev/slides.md` — a complete deck using all the theme's features.
+
+### If you'd rather do it by hand
+
+The script just automates the equivalent of: create a folder, write a `package.json` with `"slidev-theme-ctp": "file:../ctp-templates/slidev"`, write a `slides.md` with `theme: ctp`, copy `nyuad-logo.png` into `public/brand/`, and write a `.gitignore`. (`file:` is used rather than `link:` so the deck works with either `npm install` or `pnpm install` — `link:` is a pnpm-specific protocol that npm rejects with `EUNSUPPORTEDPROTOCOL`.) Open `scripts/new-deck.mjs` in this repo if you want to see exactly what it does — it's short and commented. Tweak it freely if your workflow needs extra steps (e.g. add a custom layout, init git, etc.).
+
+---
+
+## Keeping up with template updates
+
+Your deck depends on the theme via `"slidev-theme-ctp": "file:../ctp-templates/slidev"` — a **symlink**, not a copy. So when the CTP brand or layouts evolve in this repo, you don't reinstall anything.
+
+### Get the latest theme
+
+```bash
+cd /path/to/ctp-templates
+git pull
+```
+
+That's it. Your next browser reload (or next `npx slidev build` / `export`) picks up the new theme. The same `git pull` updates every deck on your machine that links to this repo — workshops in the series, every standalone deck you've scaffolded.
+
+### When a breaking change ships
+
+Rare, but possible — a renamed layout, a removed CSS variable, a tightened component prop. The templates repo flags any breaking change in two places:
+
+- The relevant section of [`AGENTS.md`](../AGENTS.md) — the canonical "what changed and why" record for agents and humans.
+- A note in the [Slidev README](README.md) (this file), usually near the layout or component that changed.
+
+Check those if a slide suddenly renders wrong after a pull. Most fixes are one-line edits in your `slides.md` (rename a slot marker, swap a class). If you need to stay on the old theme, every commit in `ctp-templates` is git-addressable — `git checkout <commit-or-tag>` in the templates repo pins your deck to that snapshot.
+
+### Decks you've already shipped don't move
+
+PDFs and static builds are frozen at the moment you ran `npx slidev export` or `npx slidev build`. Template updates don't retroactively change a file you've already produced — only running dev servers and **future** builds see the new theme. If you need to rebuild a delivered deck against the same theme version, tag the templates commit you shipped on (`git tag ws01-delivered-2026-05-12`) and `git checkout` that tag before rebuilding.
 
 To **export to PDF** when you're done:
 
