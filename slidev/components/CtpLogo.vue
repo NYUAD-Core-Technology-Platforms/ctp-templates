@@ -11,7 +11,7 @@
   <div class="ctp-logo" :class="{ 'ctp-logo--white': white }">
     <img
       class="ctp-logo__img"
-      :src="src"
+      :src="resolvedSrc"
       alt="NYU Abu Dhabi"
       :style="white ? 'filter: brightness(0) invert(1);' : ''"
     />
@@ -20,15 +20,28 @@
 </template>
 
 <script setup lang="ts">
-withDefaults(defineProps<{
+import { computed } from 'vue'
+
+const props = withDefaults(defineProps<{
   /** Render as white (for dark/violet backgrounds) */
   white?: boolean
   /** Hide the CTP sublabel */
   minimal?: boolean
-  /** Override the logo path. Default points to /brand/nyuad-logo.png. */
+  /** Override the logo path. Default points to the bundled brand asset. */
   src?: string
 }>(), {
-  src: '/brand/nyuad-logo.png',
+  src: 'brand/nyuad-logo.png',
+})
+
+// Prefix Vite's base URL so the asset resolves whether the deck is served at
+// the domain root (PDF export, local preview) OR under a sub-path (GitHub
+// Pages project sites, e.g. /repo/NN-slug/). A bare "/brand/..." would point
+// at the domain root and 404 on a sub-path deploy.
+const resolvedSrc = computed(() => {
+  const s = props.src
+  if (/^(https?:|data:|blob:)/.test(s)) return s          // leave full URLs alone
+  const base = import.meta.env.BASE_URL || '/'             // always ends with "/"
+  return base + s.replace(/^\//, '')                       // join, dropping any leading slash
 })
 </script>
 
