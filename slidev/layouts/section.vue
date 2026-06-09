@@ -31,6 +31,14 @@
 
 <style scoped>
 .ctp-section {
+  /* Claim the full slide so the deep-violet background is full-bleed. Without
+     this the layout collapses to content height and the lower half of the slide
+     shows the white page behind it (looks unfinished). Mirrors .ctp-default and
+     .ctp-two-cols, which already set height for the same reason. */
+  height: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -61,6 +69,16 @@
   letter-spacing: var(--tracked);
   color: var(--gold);
   margin-bottom: var(--s-5);
+}
+
+/* Short gold rule beneath the PART label, so the divider reads as intentional. */
+.ctp-section__number::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 2px;
+  margin-top: var(--s-4);
+  background: var(--gold);
 }
 
 /* Style the markdown-generated <h1> via :deep(), slot content lives in the
