@@ -36,7 +36,7 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const repoRoot = resolve(__dirname, '..')               // ctp-templates/
-const parentDir = resolve(repoRoot, '..')               // <parent>/  — where sibling decks live
+const parentDir = resolve(repoRoot, '..')               // <parent>/ , where sibling decks live
 const themeRel = '../ctp-templates/slidev'              // relative from new deck → theme
 
 // ----- Parse + validate the slug ---------------------------------------------
@@ -91,7 +91,7 @@ if (existsSync(brandSrc)) {
   console.warn(`Warning: brand asset not found at ${brandSrc}; skipping logo copy.`)
 }
 
-// package.json — Slidev pinned to ^0.49.0 because v52 has a Windows path bug.
+// package.json, Slidev pinned to ^0.49.0 because v52 has a Windows path bug.
 writeFileSync(
   join(targetDir, 'package.json'),
   JSON.stringify(
@@ -99,7 +99,7 @@ writeFileSync(
       name: slug,
       version: '0.1.0',
       private: true,
-      description: `${titleCase} — a CTP presentation built with slidev-theme-ctp.`,
+      description: `${titleCase}, a CTP presentation built with slidev-theme-ctp.`,
       scripts: {
         dev: 'slidev --open',
         build: 'slidev build',
@@ -107,14 +107,14 @@ writeFileSync(
         'export:pdf': 'slidev export --format pdf',
       },
       dependencies: {
-        // file: protocol — symlinks to the sibling ctp-templates repo.
+        // file: protocol, symlinks to the sibling ctp-templates repo.
         // (Equivalent to `link:` in pnpm but npm doesn't recognize `link:`,
         // so `file:` is the cross-tool-compatible choice. Both protocols
         // create a symlink in node_modules for local directory paths.)
         'slidev-theme-ctp': `file:${themeRel}`,
       },
       devDependencies: {
-        // Pin to 0.49.x — v52 has a Windows path bug; drop the upper bound
+        // Pin to 0.49.x, v52 has a Windows path bug; drop the upper bound
         // once that's fixed upstream.
         '@slidev/cli': '^0.49.0',
         '@slidev/types': '^0.49.0',
@@ -126,7 +126,7 @@ writeFileSync(
   ) + '\n',
 )
 
-// slides.md — minimal starter that exercises the theme's main layouts.
+// slides.md, minimal starter that exercises the theme's main layouts.
 writeFileSync(
   join(targetDir, 'slides.md'),
   `---
@@ -203,7 +203,7 @@ Questions? Reach out via the CTP Upscaling channel.
 `,
 )
 
-// README — run instructions specific to this deck.
+// README, run instructions specific to this deck.
 writeFileSync(
   join(targetDir, 'README.md'),
   `# ${titleCase}
@@ -235,15 +235,15 @@ PDF export requires Playwright (one-time install): \`npm install --save-dev play
 
 ## Structure
 
-- \`slides.md\` — the deck (edit this)
-- \`public/img/\` — your deck-specific images
-- \`public/brand/\` — NYUAD lockup, mirrored from \`ctp-templates/shared/brand/\`
+- \`slides.md\`, the deck (edit this)
+- \`public/img/\`, your deck-specific images
+- \`public/brand/\`, NYUAD lockup, mirrored from \`ctp-templates/shared/brand/\`
 
 For the full theme reference (every layout, every component, every CSS variable you can override), see [\`ctp-templates/slidev/README.md\`](../ctp-templates/slidev/README.md).
 `,
 )
 
-// .gitignore — keep node_modules and build artifacts out of version control.
+// .gitignore, keep node_modules and build artifacts out of version control.
 writeFileSync(
   join(targetDir, '.gitignore'),
   `# Dependencies

@@ -1,6 +1,6 @@
 # CTP LaTeX templates
 
-LaTeX templates for CTP deliverables — reports, posters, theses, methods notes. Placeholder for now; the structure below is a suggestion when the first template lands.
+LaTeX templates for CTP deliverables, reports, posters, theses, methods notes. Placeholder for now; the structure below is a suggestion when the first template lands.
 
 ## Planned layout
 
@@ -8,7 +8,7 @@ LaTeX templates for CTP deliverables — reports, posters, theses, methods notes
 latex/
 ├── README.md                       # this file
 ├── shared/
-│   └── ctp.cls                     # shared CTP LaTeX class — colors, fonts, page geometry
+│   └── ctp.cls                     # shared CTP LaTeX class, colors, fonts, page geometry
 │
 ├── report/                         # technique / methods report template
 │   ├── main.tex
@@ -35,9 +35,9 @@ When the design system changes (`shared/brand/`), update the macros in `ctp.cls`
 
 ## Conventions when adding the first template
 
-- Use `lualatex` (or `xelatex`) — we need `fontspec` to load Inter and Source Serif 4 (the design-system fonts).
+- Use `lualatex` (or `xelatex`), we need `fontspec` to load Inter and Source Serif 4 (the design-system fonts).
 - Keep a `Makefile` at the root of each template with `make`, `make clean`, `make watch` targets.
-- Don't commit `*.aux`, `*.log`, `*.pdf` build artifacts — they go in `.gitignore`.
+- Don't commit `*.aux`, `*.log`, `*.pdf` build artifacts, they go in `.gitignore`.
 - Document the build command in the template's own `README.md`.
 
 See the top-level `AGENTS.md` for cross-template rules (no emoji, no decorative left borders, etc.).

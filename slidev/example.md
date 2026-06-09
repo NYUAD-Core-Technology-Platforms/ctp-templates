@@ -3,7 +3,7 @@
 # so theme users can see what is available. Workshops should NOT edit this file;
 # instead, copy the patterns into their own slides.md.
 theme: ./
-title: CTP Slidev Theme — Demo
+title: CTP Slidev Theme, Demo
 info: |
   Demonstration of the `slidev-theme-ctp` theme.
 
@@ -37,7 +37,7 @@ PART 01
 # Layouts
 
 ::subtitle::
-Four reusable slide shapes — pick the one that fits the idea.
+Four reusable slide shapes, pick the one that fits the idea.
 
 ---
 layout: default
@@ -57,7 +57,7 @@ Speaker notes go inside an HTML comment under the slide content. See the source 
 
 <!--
 This is what speaker notes look like. They show up in the presenter view but
-not the audience view. Use them liberally — your future self will thank you.
+not the audience view. Use them liberally, your future self will thank you.
 -->
 
 ---

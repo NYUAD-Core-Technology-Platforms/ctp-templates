@@ -1,5 +1,5 @@
 <!--
-  CtpCallout — labeled note box.
+  CtpCallout, labeled note box.
   Hairline border + light surface, no colored left-border accent (the design
   system explicitly avoids that trope). Label rendered as an eyebrow.
 

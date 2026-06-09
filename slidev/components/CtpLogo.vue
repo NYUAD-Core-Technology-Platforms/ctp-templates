@@ -1,5 +1,5 @@
 <!--
-  CtpLogo — official NYUAD lockup.
+  CtpLogo, official NYUAD lockup.
   Uses the real PNG asset from the design system. For dark backgrounds, the
   `white` prop applies `brightness(0) invert(1)` so the violet logo reads as
   white, matching the design-system guidance.

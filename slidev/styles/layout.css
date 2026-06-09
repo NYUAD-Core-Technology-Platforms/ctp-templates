@@ -1,5 +1,5 @@
 /*
- * Slide typography and rules — leans on the tokens in tokens.css.
+ * Slide typography and rules, leans on the tokens in tokens.css.
  * Faithful to the NYUAD design language:
  *   - Display & H1 are SERIF (Source Serif 4).
  *   - H2 is ALL-CAPS tracked sans (institutional section heads).
@@ -15,7 +15,7 @@
   font-size: var(--t-body);
 }
 
-/* Headings — editorial serif for display ranks, sans for section labels. */
+/* Headings, editorial serif for display ranks, sans for section labels. */
 .slidev-layout h1 {
   font-family: var(--font-serif);
   font-size: var(--t-h1);
@@ -61,7 +61,7 @@
 .slidev-layout ul li::marker { color: var(--nyu-violet); }
 .slidev-layout ol li::marker { color: var(--nyu-violet); font-weight: 700; }
 
-/* Lede — first paragraph after an h1 reads as editorial intro */
+/* Lede, first paragraph after an h1 reads as editorial intro */
 .slidev-layout h1 + p {
   font-family: var(--font-serif);
   font-size: var(--t-body-lg);
@@ -95,12 +95,12 @@
   /* Disable JetBrains Mono's programming ligatures inside code. They turn
      "<--", "-->", "--" into arrow / em-dash glyphs, which is wrong when the
      code is teaching literal syntax (HTML comments, shell flags, etc.).
-     Leave ligatures on for prose font (Inter) — they're fine there. */
+     Leave ligatures on for prose font (Inter), they're fine there. */
   font-variant-ligatures: none;
   font-feature-settings: "liga" 0, "calt" 0, "dlig" 0;
 }
 
-/* Code blocks — squared, hairline border, no shadow. */
+/* Code blocks, squared, hairline border, no shadow. */
 .slidev-layout pre {
   border-radius: var(--r-2);
   border: 1px solid var(--hairline);
@@ -122,7 +122,7 @@
   font-feature-settings: inherit;
 }
 
-/* Block quotes — hairline left rule (the one place a left rule is permissible:
+/* Block quotes, hairline left rule (the one place a left rule is permissible:
    it carries quotation semantics, not decorative accent). */
 .slidev-layout blockquote {
   border-left: 2px solid var(--nyu-violet);
@@ -133,7 +133,7 @@
   color: var(--fg2);
 }
 
-/* Horizontal rules — the dominant separation device in this design language. */
+/* Horizontal rules, the dominant separation device in this design language. */
 .slidev-layout hr {
   border: 0;
   border-top: 1px solid var(--hairline);
@@ -160,7 +160,7 @@
   font-weight: 600;
 }
 
-/* Eyebrow utility — small all-caps tracked sans label */
+/* Eyebrow utility, small all-caps tracked sans label */
 .eyebrow,
 .ctp-eyebrow {
   display: inline-block;
@@ -173,7 +173,7 @@
 }
 html.dark .ctp-eyebrow { color: var(--gold); }
 
-/* Tag/pill — used for status, audience hints. Pill radius is the ONE place
+/* Tag/pill, used for status, audience hints. Pill radius is the ONE place
    we deviate from squared corners, per the design system. */
 .ctp-tag {
   display: inline-block;
@@ -200,7 +200,7 @@ html.dark .ctp-eyebrow { color: var(--gold); }
 }
 
 /* Callout (legacy class for plain-Markdown usage; the <CtpCallout> component
-   is preferred). Hairline only, no left-border accent — the design system
+   is preferred). Hairline only, no left-border accent, the design system
    explicitly avoids colored left borders on cards. */
 .ctp-callout {
   background: var(--bg2);

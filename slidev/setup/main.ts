@@ -1,5 +1,5 @@
 /**
- * Slidev setup hook — runs once when the deck boots.
+ * Slidev setup hook, runs once when the deck boots.
  *
  * Use this to register Vue plugins, custom directives, or global components
  * that every workshop / deck should have. Components dropped into

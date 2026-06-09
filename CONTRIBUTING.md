@@ -4,7 +4,7 @@ A short guide for adding to or maintaining the CTP templates.
 
 ## Repo structure
 
-- Each template is its own package under `packages/`. Templates are independent — one can change without affecting the others.
+- Each template is its own package under `packages/`. Templates are independent, one can change without affecting the others.
 - `shared/` holds assets (currently brand) that multiple templates source from. Don't duplicate brand files inside individual template packages; reference `shared/brand/` instead.
 
 ## Working on the Slidev theme
@@ -14,7 +14,7 @@ pnpm install
 pnpm dev:slidev      # opens slidev/example.md at http://localhost:3030
 ```
 
-`example.md` documents every layout and component the theme exposes. Treat it as the theme's living manual — when you add a new layout or component, demo it there.
+`example.md` documents every layout and component the theme exposes. Treat it as the theme's living manual, when you add a new layout or component, demo it there.
 
 ## Design-system rules baked into the templates
 
@@ -24,7 +24,7 @@ These come from `shared/brand/DESIGN_SYSTEM.md`. The templates enforce them auto
 - No colored left-border accents on cards or callouts.
 - Squared corners (0–4px); pill radius only for tags.
 - Hairlines + whitespace separate sections, not shadows.
-- Gold (`#C99A1E`) is reserved for editorial highlights — section eyebrows + accent tag only.
+- Gold (`#C99A1E`) is reserved for editorial highlights, section eyebrows + accent tag only.
 - No emoji in template content. Lucide line icons only if needed.
 
 ## Cross-repo dev workflow

@@ -1,6 +1,6 @@
 # CTP brand assets
 
-The canonical home for the **CTP at NYUAD** visual identity. Every template in this repo (Slidev, LaTeX, PowerPoint, Word) reads from this folder. **Don't duplicate values from here into templates** — mirror them instead, so that one edit propagates everywhere.
+The canonical home for the **CTP at NYUAD** visual identity. Every template in this repo (Slidev, LaTeX, PowerPoint, Word) reads from this folder. **Don't duplicate values from here into templates**, mirror them instead, so that one edit propagates everywhere.
 
 ---
 
@@ -9,7 +9,7 @@ The canonical home for the **CTP at NYUAD** visual identity. Every template in t
 | File | What it is |
 |------|-----------|
 | `DESIGN_SYSTEM.md` | The complete CTP Design System reference: palette, type, voice, layout rules, do/avoid list. **Read this before authoring any new template.** |
-| `colors_and_type.css` | Canonical CSS tokens — colors, fonts, spacing, radii, shadows. The Slidev theme's `slidev/styles/tokens.css` is derived from this file. Non-CSS templates (LaTeX, PowerPoint, Word) mirror the same values into their own format. |
+| `colors_and_type.css` | Canonical CSS tokens, colors, fonts, spacing, radii, shadows. The Slidev theme's `slidev/styles/tokens.css` is derived from this file. Non-CSS templates (LaTeX, PowerPoint, Word) mirror the same values into their own format. |
 | `nyuad-logo.png` | Official NYUAD lockup (purple-on-transparent, 877×221). Used everywhere. For dark backgrounds, apply `filter: brightness(0) invert(1)` (CSS) or the equivalent in your target format. The Slidev `CtpLogo` component's `white` prop does this automatically. |
 | `README.md` | This file. |
 
@@ -33,13 +33,13 @@ When the brand shifts:
 
 Consumer repos (like `ctp-upscaling-workshop-series`) also keep a copy of `nyuad-logo.png` in each workshop's `public/brand/`. If the logo changes, those mirrors need updating too. The workshop-series scaffold script copies the logo from `shared/brand/` at workshop creation, so new workshops are always current.
 
-For future templates (LaTeX, PowerPoint, Word), the same pattern applies — they reference assets here and mirror token values into their format-specific config.
+For future templates (LaTeX, PowerPoint, Word), the same pattern applies, they reference assets here and mirror token values into their format-specific config.
 
 ---
 
 ## When the design system changes
 
-`DESIGN_SYSTEM.md` is the contract that every template implements. If you find a design rule that's getting in the way of a real need, **don't override it locally** — propose a change to `DESIGN_SYSTEM.md`, then propagate it to every template that's affected. The whole point of having a design system is consistency; one-off exceptions defeat that.
+`DESIGN_SYSTEM.md` is the contract that every template implements. If you find a design rule that's getting in the way of a real need, **don't override it locally**, propose a change to `DESIGN_SYSTEM.md`, then propagate it to every template that's affected. The whole point of having a design system is consistency; one-off exceptions defeat that.
 
 ---
 
@@ -49,11 +49,11 @@ These come straight from `DESIGN_SYSTEM.md`. Restating them here so they're impo
 
 - **Type:** Source Serif 4 for display + h1 (editorial); Inter for body and h2 (h2 is ALL-CAPS with letter-spacing tracking); JetBrains Mono for code.
 - **Brand color:** NYU Violet `#57068C`. NYUAD chrome: deep violet `#3D0462`. Gold `#C99A1E` is reserved for editorial highlights only.
-- **No colored left-border accents** on callouts or cards — hairline borders and whitespace separate things.
+- **No colored left-border accents** on callouts or cards, hairline borders and whitespace separate things.
 - **Squared corners** (0–4px). Pills (`border-radius: 999px`) allowed only on tag chips.
 - **Hairlines, not shadows.**
 - **No emoji** in any template content. The brand is institutional.
 - **No decorative icons.** Use Lucide (stroke-based) only when an icon carries function.
 - **No gradients, no patterns.** Flat surfaces only.
 
-If you're authoring a new template and any of these rules feels wrong for that format, take it to a maintainer before deviating — don't silently make exceptions.
+If you're authoring a new template and any of these rules feels wrong for that format, take it to a maintainer before deviating, don't silently make exceptions.

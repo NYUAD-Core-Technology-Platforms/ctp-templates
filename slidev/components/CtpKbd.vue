@@ -1,5 +1,5 @@
 <!--
-  CtpKbd — keyboard key chip. <CtpKbd>Cmd</CtpKbd> <CtpKbd>K</CtpKbd>
+  CtpKbd, keyboard key chip. <CtpKbd>Cmd</CtpKbd> <CtpKbd>K</CtpKbd>
 -->
 <template>
   <kbd class="ctp-kbd"><slot /></kbd>

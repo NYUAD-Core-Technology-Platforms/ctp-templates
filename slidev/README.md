@@ -2,17 +2,17 @@
 
 The Slidev theme for CTP at NYU Abu Dhabi. It bundles the layouts, components, fonts, and colors that give every CTP presentation the same look. This folder is the theme itself; presentations that use it live in other repos (like `ctp-upscaling-workshop-series`) or in their own folder on your machine.
 
-The visual identity is the **official NYUAD CTP Design System** — see `../shared/brand/DESIGN_SYSTEM.md` for the full reference (palette, type, voice, do/avoid). This theme is the design system, applied to Slidev decks.
+The visual identity is the **official NYUAD CTP Design System**, see `../shared/brand/DESIGN_SYSTEM.md` for the full reference (palette, type, voice, do/avoid). This theme is the design system, applied to Slidev decks.
 
 ---
 
 ## Table of contents
 
-- [Preview the theme on its own](#preview-the-theme-on-its-own) — see what the theme looks like before you use it
-- [Use the theme for a new workshop in the workshop series](#use-the-theme-for-a-new-workshop-in-the-workshop-series) — one command, all set
-- [Use the theme for a standalone presentation](#use-the-theme-for-a-standalone-presentation) — six steps the first time
-- [What's in this theme](#whats-in-this-theme) — layouts, components, CSS tokens
-- [Re-skinning / customizing](#re-skinning--customizing) — change colors or fonts
+- [Preview the theme on its own](#preview-the-theme-on-its-own), see what the theme looks like before you use it
+- [Use the theme for a new workshop in the workshop series](#use-the-theme-for-a-new-workshop-in-the-workshop-series), one command, all set
+- [Use the theme for a standalone presentation](#use-the-theme-for-a-standalone-presentation), six steps the first time
+- [What's in this theme](#whats-in-this-theme), layouts, components, CSS tokens
+- [Re-skinning / customizing](#re-skinning--customizing), change colors or fonts
 - [File layout](#file-layout)
 - [Design-language rules baked in](#design-language-rules-baked-in)
 
@@ -72,9 +72,9 @@ The full walkthrough with explanations of every step lives in [`ctp-upscaling-wo
 
 ## Use the theme for a standalone presentation
 
-For a one-off deck **outside** the workshop series — a seminar talk, a meeting deck, a poster pitch — one command scaffolds everything.
+For a one-off deck **outside** the workshop series, a seminar talk, a meeting deck, a poster pitch, one command scaffolds everything.
 
-### Prerequisite — `ctp-templates` cloned once
+### Prerequisite, `ctp-templates` cloned once
 
 Have this repo (`ctp-templates`) checked out somewhere on your machine. The new deck folder will be created **next to** it, so they share a parent. If you don't have it yet:
 
@@ -95,14 +95,14 @@ From inside `ctp-templates`:
 pnpm new-deck my-talk
 ```
 
-> Replace `my-talk` with whatever you want to call your deck — kebab-case (lowercase letters, digits, hyphens). The script creates a sibling folder `../my-talk/` with everything wired up. It aborts if the folder already exists.
+> Replace `my-talk` with whatever you want to call your deck, kebab-case (lowercase letters, digits, hyphens). The script creates a sibling folder `../my-talk/` with everything wired up. It aborts if the folder already exists.
 
 The script generates:
 
 ```
 <parent>/
 ├── ctp-templates/                  (this repo)
-└── my-talk/                        (new — created by the script)
+└── my-talk/                        (new, created by the script)
     ├── slides.md                   (minimal cover + section + content + end)
     ├── package.json                (Slidev pinned to ^0.49.0; theme via link:)
     ├── README.md                   (deck-specific run instructions)
@@ -124,7 +124,7 @@ npx slidev
 
 ### What gets generated in `slides.md`
 
-A minimal starter that exercises the main theme layouts — cover, section divider, default content slide, end. Replace it with your content:
+A minimal starter that exercises the main theme layouts, cover, section divider, default content slide, end. Replace it with your content:
 
 ```yaml
 ---
@@ -148,17 +148,17 @@ Core Technology Platforms · NYU Abu Dhabi
 2026-06-08
 ```
 
-For the full set of layouts, components, and CSS variables you can override, see [What's in this theme](#whats-in-this-theme) below. For a worked example, look at `ctp-upscaling-workshop-series/workshops/01-slidev/slides.md` — a complete deck using all the theme's features.
+For the full set of layouts, components, and CSS variables you can override, see [What's in this theme](#whats-in-this-theme) below. For a worked example, look at `ctp-upscaling-workshop-series/workshops/01-slidev/slides.md`, a complete deck using all the theme's features.
 
 ### If you'd rather do it by hand
 
-The script just automates the equivalent of: create a folder, write a `package.json` with `"slidev-theme-ctp": "file:../ctp-templates/slidev"`, write a `slides.md` with `theme: ctp`, copy `nyuad-logo.png` into `public/brand/`, and write a `.gitignore`. (`file:` is used rather than `link:` so the deck works with either `npm install` or `pnpm install` — `link:` is a pnpm-specific protocol that npm rejects with `EUNSUPPORTEDPROTOCOL`.) Open `scripts/new-deck.mjs` in this repo if you want to see exactly what it does — it's short and commented. Tweak it freely if your workflow needs extra steps (e.g. add a custom layout, init git, etc.).
+The script just automates the equivalent of: create a folder, write a `package.json` with `"slidev-theme-ctp": "file:../ctp-templates/slidev"`, write a `slides.md` with `theme: ctp`, copy `nyuad-logo.png` into `public/brand/`, and write a `.gitignore`. (`file:` is used rather than `link:` so the deck works with either `npm install` or `pnpm install`, `link:` is a pnpm-specific protocol that npm rejects with `EUNSUPPORTEDPROTOCOL`.) Open `scripts/new-deck.mjs` in this repo if you want to see exactly what it does, it's short and commented. Tweak it freely if your workflow needs extra steps (e.g. add a custom layout, init git, etc.).
 
 ---
 
 ## Keeping up with template updates
 
-Your deck depends on the theme via `"slidev-theme-ctp": "file:../ctp-templates/slidev"` — a **symlink**, not a copy. So when the CTP brand or layouts evolve in this repo, you don't reinstall anything.
+Your deck depends on the theme via `"slidev-theme-ctp": "file:../ctp-templates/slidev"`, a **symlink**, not a copy. So when the CTP brand or layouts evolve in this repo, you don't reinstall anything.
 
 ### Get the latest theme
 
@@ -167,20 +167,20 @@ cd /path/to/ctp-templates
 git pull
 ```
 
-That's it. Your next browser reload (or next `npx slidev build` / `export`) picks up the new theme. The same `git pull` updates every deck on your machine that links to this repo — workshops in the series, every standalone deck you've scaffolded.
+That's it. Your next browser reload (or next `npx slidev build` / `export`) picks up the new theme. The same `git pull` updates every deck on your machine that links to this repo, workshops in the series, every standalone deck you've scaffolded.
 
 ### When a breaking change ships
 
-Rare, but possible — a renamed layout, a removed CSS variable, a tightened component prop. The templates repo flags any breaking change in two places:
+Rare, but possible, a renamed layout, a removed CSS variable, a tightened component prop. The templates repo flags any breaking change in two places:
 
-- The relevant section of [`AGENTS.md`](../AGENTS.md) — the canonical "what changed and why" record for agents and humans.
+- The relevant section of [`AGENTS.md`](../AGENTS.md), the canonical "what changed and why" record for agents and humans.
 - A note in the [Slidev README](README.md) (this file), usually near the layout or component that changed.
 
-Check those if a slide suddenly renders wrong after a pull. Most fixes are one-line edits in your `slides.md` (rename a slot marker, swap a class). If you need to stay on the old theme, every commit in `ctp-templates` is git-addressable — `git checkout <commit-or-tag>` in the templates repo pins your deck to that snapshot.
+Check those if a slide suddenly renders wrong after a pull. Most fixes are one-line edits in your `slides.md` (rename a slot marker, swap a class). If you need to stay on the old theme, every commit in `ctp-templates` is git-addressable, `git checkout <commit-or-tag>` in the templates repo pins your deck to that snapshot.
 
 ### Decks you've already shipped don't move
 
-PDFs and static builds are frozen at the moment you ran `npx slidev export` or `npx slidev build`. Template updates don't retroactively change a file you've already produced — only running dev servers and **future** builds see the new theme. If you need to rebuild a delivered deck against the same theme version, tag the templates commit you shipped on (`git tag ws01-delivered-2026-05-12`) and `git checkout` that tag before rebuilding.
+PDFs and static builds are frozen at the moment you ran `npx slidev export` or `npx slidev build`. Template updates don't retroactively change a file you've already produced, only running dev servers and **future** builds see the new theme. If you need to rebuild a delivered deck against the same theme version, tag the templates commit you shipped on (`git tag ws01-delivered-2026-05-12`) and `git checkout` that tag before rebuilding.
 
 To **export to PDF** when you're done:
 
@@ -194,7 +194,7 @@ npm install --save-dev playwright-chromium
 npx slidev export
 ```
 
-> `npx` runs the `slidev` CLI binary that's installed in this project's `node_modules/`. `export` is the PDF subcommand. Produces a single file `slides-export.pdf` in the project root — one slide per PDF page.
+> `npx` runs the `slidev` CLI binary that's installed in this project's `node_modules/`. `export` is the PDF subcommand. Produces a single file `slides-export.pdf` in the project root, one slide per PDF page.
 
 To **build a static site** you can host anywhere:
 
@@ -214,7 +214,7 @@ npx slidev build
 |------|-----------|-------|
 | `cover` | Title slide of the deck | `eyebrow` (small label above title), `meta` (date / presenter / location below title) |
 | `section` | Full-bleed divider between major parts | `number` (e.g. "PART 01"), `subtitle` (lede paragraph) |
-| `default` | Everyday content slide with the CTP footer | — |
+| `default` | Everyday content slide with the CTP footer |, |
 | `two-cols-header` | Header row spanning both columns, then two columns underneath | `left`, `right` |
 | `end` | Closing thanks / contact slide | `meta` |
 
@@ -274,15 +274,15 @@ Reload the browser. Every accent in your deck repaints.
 
 Edit `styles/tokens.css` in this theme. It has two halves:
 
-1. **Canonical NYUAD design tokens** — match `../shared/brand/colors_and_type.css` 1:1. Editing here propagates everywhere.
+1. **Canonical NYUAD design tokens**, match `../shared/brand/colors_and_type.css` 1:1. Editing here propagates everywhere.
    - Brand: `--nyu-violet` (`#57068C`), `--nyuad-deep-violet` (`#3D0462`), full violet scale `--violet-050` … `--violet-900`
    - Neutrals: `--ink-050` … `--ink-900`, `--white`
-   - Accent: `--gold` (`#C99A1E`) — reserved for editorial highlights, do not sprinkle
+   - Accent: `--gold` (`#C99A1E`), reserved for editorial highlights, do not sprinkle
    - Type: `--font-sans` (Inter), `--font-serif` (Source Serif 4), `--font-mono` (JetBrains Mono)
    - Scale: `--t-display`, `--t-h1`, `--t-h2`, `--t-eyebrow`, `--t-body`, `--lh-*`, `--tracked*`
    - Spacing: `--s-1` (4px) … `--s-10` (128px)
-   - Radii: `--r-0` … `--r-3`, `--r-pill` (institutional — squared by design)
-2. **`--ctp-*` aliases** — what this theme's layouts and components actually reference. Don't change these; change the canonical tokens above and the aliases follow.
+   - Radii: `--r-0` … `--r-3`, `--r-pill` (institutional, squared by design)
+2. **`--ctp-*` aliases**, what this theme's layouts and components actually reference. Don't change these; change the canonical tokens above and the aliases follow.
 
 If you change tokens here, also update `../shared/brand/colors_and_type.css` so the canonical source stays in sync.
 
@@ -296,7 +296,7 @@ Slidev toggles a `.dark` class on `<html>` when the user presses `d`. The theme 
 
 ```
 slidev/
-├── example.md              # Demo deck — preview by running pnpm dev:slidev
+├── example.md              # Demo deck, preview by running pnpm dev:slidev
 ├── package.json            # name: slidev-theme-ctp
 ├── components/
 │   ├── CtpLogo.vue         # NYUAD lockup (PNG from /public/brand/)
@@ -312,7 +312,7 @@ slidev/
 ├── public/
 │   └── brand/              # NYUAD logo files mirrored from ../shared/brand/
 ├── styles/
-│   ├── index.ts            # Slidev style entry — imports tokens.css + layout.css
+│   ├── index.ts            # Slidev style entry, imports tokens.css + layout.css
 │   ├── tokens.css          # Design-system tokens + --ctp-* aliases
 │   └── layout.css          # Typography and slide-level rules
 └── setup/
@@ -330,7 +330,7 @@ The layouts and components enforce these automatically; don't override them in s
 - **No colored left-border accents** on callouts or cards. Hairline borders + whitespace do the separating.
 - **Squared corners** (0–4px). Pill radius (`--r-pill`) only on tags and status chips.
 - **Hairlines, not shadows.** A 1px border in the neutral hairline color is the dominant separator.
-- **Gold** (`#C99A1E`) is reserved for editorial highlights — section-divider eyebrows and the accent tag variant. Don't sprinkle it.
+- **Gold** (`#C99A1E`) is reserved for editorial highlights, section-divider eyebrows and the accent tag variant. Don't sprinkle it.
 - **No emoji** in slide content. The brand is institutional.
 
 ---

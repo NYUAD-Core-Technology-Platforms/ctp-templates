@@ -1,7 +1,7 @@
 <!--
   layout: end
-  Closing slide. Mirrors the section layout — deep violet, serif display title
-  — for symmetry with the section dividers.
+  Closing slide. Mirrors the section layout, deep violet, serif display title
+ , for symmetry with the section dividers.
 
   Slots:
     - default : markdown title (e.g. `# Thanks!`)

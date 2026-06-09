@@ -3,7 +3,7 @@
   Full-bleed divider between major parts of a deck.
     - Deep violet background (NYUAD chrome color).
     - Gold eyebrow with the section number.
-    - Big serif display title — produced by the user's `# Title` in markdown.
+    - Big serif display title, produced by the user's `# Title` in markdown.
     - Optional subtitle in violet-200, serif lede style.
 
   Important: don't wrap the default slot in an <h1>. The markdown `#` already
@@ -63,7 +63,7 @@
   margin-bottom: var(--s-5);
 }
 
-/* Style the markdown-generated <h1> via :deep() — slot content lives in the
+/* Style the markdown-generated <h1> via :deep(), slot content lives in the
    parent's CSS scope, so plain scoped selectors don't reach it. */
 .ctp-section__title :deep(h1) {
   font-family: var(--font-serif);

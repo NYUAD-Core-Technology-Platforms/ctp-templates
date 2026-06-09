@@ -1,7 +1,7 @@
 <!--
-  CtpFooter — slim hairline footer on content slides.
+  CtpFooter, slim hairline footer on content slides.
   Eyebrow label on the left (deck title in all-caps tracked sans), tabular
-  mono page number on the right. No decorative dots — design language is
+  mono page number on the right. No decorative dots, design language is
   restrained.
 -->
 <template>
@@ -37,7 +37,7 @@ const author = computed(() => cfg.author || '')
 }
 
 .ctp-footer__left {
-  /* inherits .ctp-eyebrow styling — uppercase tracked sans, violet */
+  /* inherits .ctp-eyebrow styling, uppercase tracked sans, violet */
 }
 
 .ctp-footer__right { display: flex; align-items: center; gap: var(--s-2); }
