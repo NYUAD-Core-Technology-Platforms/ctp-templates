@@ -98,7 +98,7 @@ slidev/
 ├── package.json        # name: slidev-theme-ctp
 ├── example.md          # demo deck (preview with pnpm dev:slidev)
 ├── layouts/            # cover, section, default, two-cols-header, end
-├── components/         # CtpLogo, CtpFooter, CtpCallout, CtpKbd
+├── components/         # CtpLogo, CtpFooter, CtpCallout, CtpKbd, AutoFit
 ├── styles/
 │   ├── index.ts        # Slidev style entry, imports tokens.css + layout.css
 │   ├── tokens.css      # design-system tokens + --ctp-* aliases
