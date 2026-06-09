@@ -128,3 +128,10 @@ Tag the repo per template release: `git tag slidev-theme-v0.2.0`. Future-you wil
 - Update `README.md` if you added or changed a template's status.
 - Update this `AGENTS.md` if you discovered a new gotcha that future agents should know.
 - Run `pnpm dev:slidev` and click through `slidev/example.md` before committing slidev changes, Vite hot reload tells you about most regressions immediately.
+
+
+## Cross-repo CI: rebuild decks on theme change (added 2026-06-08)
+
+- `.github/workflows/notify-workshops.yml` fires on push to `main` that touches `slidev/**` (and on manual dispatch). It sends a `repository_dispatch` event of type `theme-updated` to NYUAD-Core-Technology-Platforms/ctp-upscaling-workshop-series, which makes that repo rebuild and republish its GitHub Pages site against the updated theme.
+- Requires a repo secret `WORKSHOPS_DISPATCH_TOKEN`: a fine-grained PAT with `Contents: Read and write` scoped to the workshop-series repo only.
+- Static-hosting rule for the theme: any component that points at a bundled public asset must build the URL from `import.meta.env.BASE_URL`, not a leading-slash path like `/brand/x.png`. A bare absolute path 404s when a deck is served under a Pages sub-path (e.g. /repo/NN-slug/). See `slidev/components/CtpLogo.vue` (resolvedSrc), and note Vite rewrites markdown image paths with the base but not runtime `:src` bindings.

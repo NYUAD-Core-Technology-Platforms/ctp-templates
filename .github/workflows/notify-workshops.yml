@@ -1,0 +1,30 @@
+name: Rebuild dependent decks on theme change
+
+# When the Slidev theme changes on main, tell the workshop-series repo to
+# rebuild and republish its GitHub Pages site so every deck picks up the
+# updated theme. Uses a repository_dispatch event (the standard cross-repo
+# "rebuild downstream" trigger).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'slidev/**'        # only when the Slidev theme actually changes
+  workflow_dispatch: {}    # allow manual "rebuild the decks now"
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch theme-updated to the workshop series
+        env:
+          # Fine-grained PAT with "Contents: Read and write" on
+          # NYUAD-Core-Technology-Platforms/ctp-upscaling-workshop-series ONLY.
+          # Add it as a repo secret named WORKSHOPS_DISPATCH_TOKEN.
+          GH_TOKEN: ${{ secrets.WORKSHOPS_DISPATCH_TOKEN }}
+        run: |
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            /repos/NYUAD-Core-Technology-Platforms/ctp-upscaling-workshop-series/dispatches \
+            -f event_type=theme-updated
