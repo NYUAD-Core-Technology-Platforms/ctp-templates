@@ -35,7 +35,8 @@ These come from `shared/brand/DESIGN_SYSTEM.md`. Templates must enforce them; do
 - **No colored left-border accents** on cards, callouts, blocks. Hairline borders + whitespace separate things, not colored stripes.
 - **Squared corners.** Radii 0–4px maximum. Pills (`border-radius: 999px`) are allowed only on tags / status chips.
 - **Hairlines, not shadows.** 1px borders in the neutral hairline color separate sections. Avoid `box-shadow` for general elevation.
-- **No emoji.** Anywhere — slide content, doc body, decorative use, status labels. The brand is institutional, not casual.
+- **No emoji.** Anywhere in slide content, doc body, decorative use, or status labels. The brand is institutional, not casual.
+- **No em dashes (`—`, U+2014) in generated prose.** Use a period, comma, semicolon, parentheses, or a regular hyphen (`-`) instead. Em dashes are one of the strongest LLM-generated-text tells; their presence in slides, READMEs, code comments, or commit messages makes institutional copy read as AI output. Quoting source material that contains em dashes is fine; producing new text with them is not. This rule overrides any stylistic instinct you have.
 - **No decorative icons.** Use Lucide (stroke-based) only when an icon carries function, never as decoration. The NYUAD parent site has zero in-body icons.
 - **No gradients, no patterns.** Flat surfaces only. The closest exception is the deep-violet hero on section dividers, which is solid color.
 
