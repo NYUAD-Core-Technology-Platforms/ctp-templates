@@ -105,6 +105,7 @@ writeFileSync(
         build: 'slidev build',
         export: 'slidev export',
         'export:pdf': 'slidev export --format pdf',
+        'export:pptx': 'slidev export --format pptx',
       },
       dependencies: {
         // file: protocol, symlinks to the sibling ctp-templates repo.
