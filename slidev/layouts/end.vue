@@ -29,6 +29,12 @@
 
 <style scoped>
 .ctp-end {
+  /* Claim the full slide so the deep-violet background remains full-bleed,
+     matching the default, section, and two-column layouts. */
+  height: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
